@@ -1,0 +1,30 @@
+class = (ID,COURSENAME,TITLE,DAYS,TIME START, TIME END,BUILDING,CLASSROOM)
+
+
+ID:
+- PRIMARY KEY
+- NOT NULL
+- AUTOINCREMENT
+
+COURSENAME:
+- NOT NULL
+- VARCHAR(40)
+
+TITLE:
+- NOT NULL 
+- VARCHAR(80)
+
+DAYS:
+- NOT NULL
+- {0: Monday, 1: Tuesday, 2: Wednesday, 3: Thursday, 4: Friday, 5: Saturday, 6: Sunday}
+
+TIME {START,END}:
+- NOT NULL
+- TIME ()
+
+BUILDING:
+- 
+
+CLASSROOM:
+- 
+

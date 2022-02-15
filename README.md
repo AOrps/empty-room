@@ -10,8 +10,8 @@ Infra + Dev into service that queries empty rooms @ NJIT
 ## :: Infrastructure
 
 ## :microscope: Technologies
-- Languages:
-- Packages: `mysql-server`, 
+- Languages: `go`
+- Packages: `mysql-server`, `Makefile`,
 
 ## :microscope: Directory Explanation
 
@@ -26,3 +26,5 @@ Infra + Dev into service that queries empty rooms @ NJIT
 ## Resources
 - [Install Ansible OSERROR Python Fix](https://stackoverflow.com/questions/54778630/could-not-install-packages-due-to-an-environmenterror-errno-2-no-such-file-or)
 - [Course Catalog](https://myhub.njit.edu/BannerExtensibility/customPage/page/stuRegCrseSched)
+- [Golang: Build from source](https://go.dev/doc/install)
+- [MySQL New User](https://askubuntu.com/questions/1322175/not-allowed-to-create-user-with-grant)

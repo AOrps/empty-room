@@ -1,17 +1,32 @@
-# empty-room
+# empty-room :construction: `Under Construction`
 Infra + Dev into service that queries empty rooms @ NJIT
 
 ## Site
-- Site will be 
+- Site will be hosted here: "" 
+
+## :tram: Infrastructure
+```txt
+.------------.             .------------.             .------------.
+| Front-end  |   <----->   | Middle-end |   <----->   |  Back-end  |
+'------------'             '------------'             '------------'
+```
 
 ## :triangular_ruler: Architecture
+- Front-end
+    - Aesthetics
+- Middle-end
+    - REST API
+- Back-end
+    - Database
 
 
-## :: Infrastructure
+
+## :hammer: How to Build
+- This repo encapsulates multiple components needed for the program to work
 
 ## :microscope: Technologies
 - Languages: `go`
-- Packages: `mysql-server`, `Makefile`,
+- Packages: `mysql-server`, `make`,
 
 ## :microscope: Directory Explanation
 
@@ -23,7 +38,7 @@ Infra + Dev into service that queries empty rooms @ NJIT
 | [util](util)                      | Util Scripts 
 | [data-processing](data-processing)| Data Processing from data-collection dir
 
-## Resources
+## :books: Resources
 - [Install Ansible OSERROR Python Fix](https://stackoverflow.com/questions/54778630/could-not-install-packages-due-to-an-environmenterror-errno-2-no-such-file-or)
 - [Course Catalog](https://myhub.njit.edu/BannerExtensibility/customPage/page/stuRegCrseSched)
 - [Golang: Build from source](https://go.dev/doc/install)

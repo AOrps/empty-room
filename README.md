@@ -20,7 +20,6 @@ Infra + Dev into service that queries empty rooms @ NJIT
     - Database
 
 
-
 ## :hammer: How to Build
 - This repo encapsulates multiple components needed for the program to work
 
@@ -43,3 +42,4 @@ Infra + Dev into service that queries empty rooms @ NJIT
 - [Course Catalog](https://myhub.njit.edu/BannerExtensibility/customPage/page/stuRegCrseSched)
 - [Golang: Build from source](https://go.dev/doc/install)
 - [MySQL New User](https://askubuntu.com/questions/1322175/not-allowed-to-create-user-with-grant)
+- [Avoid SQL Injection](https://go.dev/doc/database/sql-injection)

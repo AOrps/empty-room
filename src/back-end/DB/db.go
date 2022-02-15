@@ -10,6 +10,7 @@ import (
 	toml "github.com/pelletier/go-toml/v2"
 )
 
+
 // Structures 
 type Config struct {
 	Username string
@@ -23,7 +24,6 @@ type Test struct {
 	ID    int `json:"id"`
 	Title string `json:"title"`
 }
-
 
 func ParseCreds(path string) Config {
 	f, err := ioutil.ReadFile(path)
@@ -42,17 +42,16 @@ func ParseCreds(path string) Config {
 	return cfg
 }
 
-func MysqlConnection(conf Config) *DB {
+func MysqlConnection(conf Config) *sql.DB {
 
-	dbInfo := fmt.Sprintf("%s:%s@/%s", cfg.Username, cfg.Passwd, cfg.DBNAME)
+	dbInfo := fmt.Sprintf("%s:%s@/%s", conf.Username, conf.Passwd, conf.DBNAME)
 
 	db, err := sql.Open("mysql", dbInfo)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer db.Close()
-
 	return db
 }
+
 

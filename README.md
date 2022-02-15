@@ -25,7 +25,7 @@ Infra + Dev into service that queries empty rooms @ NJIT
 
 ## :microscope: Technologies
 - Languages: `go`
-- Packages: `mysql-server`, `make`,
+- Packages: `mysql-server`, `make`, `nginx`, `ngrok`, `npm`
 
 ## :microscope: Directory Explanation
 
@@ -43,3 +43,4 @@ Infra + Dev into service that queries empty rooms @ NJIT
 - [Golang: Build from source](https://go.dev/doc/install)
 - [MySQL New User](https://askubuntu.com/questions/1322175/not-allowed-to-create-user-with-grant)
 - [Avoid SQL Injection](https://go.dev/doc/database/sql-injection)
+- [React: Creating a new react app](https://reactjs.org/docs/create-a-new-react-app.html)

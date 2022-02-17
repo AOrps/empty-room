@@ -14,7 +14,7 @@ import {
   Row, Col
 } from 'react-bootstrap';
 import { Sched } from './components/Sched';
-
+import { InfoTable } from './components/Building';
 
 function App() {
   return (
@@ -25,9 +25,9 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to={"/map"}>Map</Nav.Link>
               <Nav.Link as={Link} to={"/schedule"}>Schedule</Nav.Link>
               <Nav.Link as={Link} to={"/find-room"}>Find Room</Nav.Link>
+              <Nav.Link as={Link} to={"/map"}>Map</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -61,11 +61,14 @@ export const CustomSchedule = () => {
 }
 
 export const FindRoom = () => {
+
   return (
     <Container className="App">
       <Row>
-        <Col>      
-        <Image fluid src={require("./images/list.jpg")} alt="MAP of NJIT" height="40%" />
+        <Col>
+        <br />
+        <InfoTable />
+        {/* <Image fluid src={require("./images/list.jpg")} alt="MAP of NJIT" height="40%" /> */}
         </Col>
         <Col>
         <Form>

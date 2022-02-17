@@ -5,7 +5,14 @@ import {
   Link,
   Routes
 } from 'react-router-dom';
-import { Navbar, Nav, Container, Image } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  Container,
+  Image,
+  Form,
+  Row, Col
+} from 'react-bootstrap';
 import { Sched } from './components/Sched';
 
 
@@ -28,9 +35,9 @@ function App() {
 
       <Routes>
         <Route path="/map" element={<Map />} />
-        <Route path="/schedule" element={<CustomSchedule />} /> 
+        <Route path="/schedule" element={<CustomSchedule />} />
         <Route path="/find-room" element={<FindRoom />} />
-        <Route path="/" element={<CustomSchedule />} />
+        <Route path="/" element={<FindRoom />} />
       </Routes>
 
     </Router>
@@ -39,23 +46,37 @@ function App() {
 
 export const Map = () => {
   return (
-    <Container>
-    <Image fluid src={require("./images/njit.jpg")} alt="MAP of NJIT" />
+    <Container className="App">
+      <Image fluid src={require("./images/njit.jpg")} alt="MAP of NJIT" />
     </Container>
   );
 }
 
 export const CustomSchedule = () => {
   return (
-  <Container className="App">
-    <Sched />
-  </Container>
+    <Container className="App">
+      <Sched />
+    </Container>
   );
 }
 
 export const FindRoom = () => {
   return (
-    <Container>
+    <Container className="App">
+      <Row>
+        <Col>      
+        <Image fluid src={require("./images/list.jpg")} alt="MAP of NJIT" height="40%" />
+        </Col>
+        <Col>
+        <Form>
+        <Form.Label>Enter Building to find an empty-room</Form.Label>
+        <Form.Control id="building" />
+        <Form.Text>
+          It is totally valid to enter the Building Abbreviation
+        </Form.Text>
+      </Form>
+        </Col>
+      </Row>
 
     </Container>
   );

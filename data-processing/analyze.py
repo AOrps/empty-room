@@ -18,11 +18,11 @@ def convert24(time: str) -> str:
     time_breakdown = time[:-2].split(":")
     hour, minute = int(time_breakdown[0]), int(time_breakdown[1])
 
-    if setOffset:
+    if setOffset and hour != 12:
         hour += 12
     
     if minute == 0:
-        minute == "00"
+        minute = "00"
     return f"{hour}:{minute}"
     
 
@@ -46,6 +46,8 @@ def main():
             times = row['Times'].split("-")
             row['Times'] = f"{convert24(times[0][:-1])}-{convert24(times[1][1:])}"
 
+        # if quickCheck(row['Location']):
+        #     print(row['Location'])
         print(f"{row['Course']},{row['Title']},{row['Days']},{row['Times']},{row['Location']},{row['Instructor']}")
 
 if __name__ == "__main__":

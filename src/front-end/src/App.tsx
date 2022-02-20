@@ -16,12 +16,15 @@ import {
 import { Sched } from './components/Sched';
 import { InfoTable } from './components/Building';
 
+
 function App() {
   return (
     <Router>
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container fluid>
-          <Navbar.Brand href="/">empty-room</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <Image fluid src={require("./images/empty-room-logo.png")} width="150px" alt="empty-room logo"/>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

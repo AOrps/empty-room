@@ -7,7 +7,6 @@ PIP Requirements: pandas
 import pandas as pd
 import os
 
-
 def convert24(time: str) -> str:
     setOffset = False
     
@@ -24,11 +23,8 @@ def convert24(time: str) -> str:
     if minute == 0:
         minute = "00"
     return f"{hour}:{minute}"
-    
 
 quickCheck = lambda val: str(val).lower() != "nan"
-
-
 
 def main():
     baseDir = "data-collection"
@@ -49,6 +45,8 @@ def main():
         # if quickCheck(row['Location']):
         #     print(row['Location'])
         print(f"{row['Course']},{row['Title']},{row['Days']},{row['Times']},{row['Location']},{row['Instructor']}")
+    
+    # print(df.to_string()) # complete dataframe thing
 
 if __name__ == "__main__":
     main()

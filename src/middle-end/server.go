@@ -88,9 +88,11 @@ func main() {
 	_ = importJSONDataFromFile("data.json", &data)
 
 	http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == "GET" {
+		if r.Method == "POST" {
 		result := executeQuery(r.URL.Query().Get("query"), schema)
 		json.NewEncoder(w).Encode(result)
+		} else {
+			fmt.Fprintf(w, "POST plz")
 		}
 	})
 

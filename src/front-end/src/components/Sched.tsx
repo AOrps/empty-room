@@ -10,7 +10,7 @@ export const Sched = () => {
     return (
     <ScheduleComponent
         currentView='Week'
-        readonly={true}
+        // readonly={true}
     >
         <ViewsDirective>
             <ViewDirective

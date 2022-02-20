@@ -25,9 +25,9 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
+              <Nav.Link as={Link} to={"/map"}>Map</Nav.Link>
               <Nav.Link as={Link} to={"/schedule"}>Schedule</Nav.Link>
               <Nav.Link as={Link} to={"/find-room"}>Find Room</Nav.Link>
-              <Nav.Link as={Link} to={"/map"}>Map</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -66,18 +66,16 @@ export const FindRoom = () => {
     <Container className="App">
       <Row>
         <Col>
-        <br />
-        <InfoTable />
-        {/* <Image fluid src={require("./images/list.jpg")} alt="MAP of NJIT" height="40%" /> */}
+          <br />
+          <InfoTable />
         </Col>
         <Col>
-        <Form>
-        <Form.Label>Enter Building to find an empty-room</Form.Label>
-        <Form.Control id="building" />
-        <Form.Text>
-          It is totally valid to enter the Building Abbreviation
-        </Form.Text>
-      </Form>
+        <br />
+          <Form>
+            <Form.Label>Enter Building to find an empty-room</Form.Label>
+            <Form.Control id="building" />
+            <Form.Text>It is totally valid to enter the Building Abbreviation</Form.Text>
+          </Form>
         </Col>
       </Row>
 

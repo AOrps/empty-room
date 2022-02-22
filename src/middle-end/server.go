@@ -9,7 +9,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-type key struct {
+type details struct {
 	Days		string `json:"days"`
 	Instructor	string `json:"instructor"`
 	Location	string `json:"location"`
@@ -23,27 +23,24 @@ var data map[string]key
 
 var userType = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name: "Key",
+		Name: "details",
 		Fields: graphql.Fields{
-			"Days": &graphql.Field{
+			"Room": &graphql.Field{
 				Type: graphql.String,
 			},
-			"Instructor": &graphql.Field{
-				Type: graphql.String,
-			},
-			"Location": &graphql.Field{
-				Type: graphql.String,
-			},
-			"Times": &graphql.Field{
+			"Key": &graphql.Field{
 				Type: graphql.String,
 			},
 			"Title": &graphql.Field{
 				Type: graphql.String,
 			},
-			"Course": &graphql.Field{
+			"Days": &graphql.Field{
 				Type: graphql.String,
 			},
-			"Section": &graphql.Field{
+			"Times": &graphql.Field{
+				Type: graphql.String,
+			},
+			"Instructor": &graphql.Field{
 				Type: graphql.String,
 			},
 		},

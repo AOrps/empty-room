@@ -85,29 +85,45 @@ def iter2(df):
                 d[building] = {}
            
             if room not in d[building]:
-                d[building][room] = []
+                d[building][room] = {}
+
             
-            if len(days) == 1:
+            for day in days:
+
+                if day not in d[building][room]:
+                    d[building][room][day] = []
+
                 inject = {
                     "key": key, 
                     "title": title,
-                    "days": days,
+                    # "days": day,
                     "time":time,
                     "instructor": instructor
                 }
-
-                d[building][room].append(inject)
-            else:
-                for day in days:
-                    inject = {
-                        "key": key, 
-                        "title": title,
-                        "days": day,
-                        "time":time,
-                        "instructor": instructor
-                    }
                 
-                    d[building][room].append(inject)
+                d[building][room][day].append(inject) 
+            
+            # if len(days) == 1:
+            #     inject = {
+            #         "key": key, 
+            #         "title": title,
+            #         "days": days,
+            #         "time":time,
+            #         "instructor": instructor
+            #     }
+
+            #     d[building][room].append(inject)
+            # else:
+            #     for day in days:
+            #         inject = {
+            #             "key": key, 
+            #             "title": title,
+            #             "days": day,
+            #             "time":time,
+            #             "instructor": instructor
+            #         }
+                
+            #         d[building][room].append(inject)
                 # else
                 # d= d[building]
                 # if room not in d[building]:

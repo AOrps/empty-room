@@ -28,24 +28,6 @@ def convert24(time: str) -> str:
 quickCheck = lambda val: str(val).lower() != "nan"
 checkNan = lambda x: "nan" if x == " " or x == "" or str(x).lower() == "nan" else x
 
-
-def print_dc():
-    baseDir = "data-collection"
-    df = pd.concat([pd.read_csv(f"{baseDir}/{f}") for f in os.listdir("data-collection")])
-
-    for _, row in df.iterrows():
-        row["Location"] = checkNan(row["Location"])
-
-        if quickCheck(row['Instructor']):
-            instructor = " ".join(reversed(row["Instructor"].split(",")))
-            row['Instructor'] = instructor[1:]
-        
-        if quickCheck(row['Times']):
-            times = row['Times'].split("-")
-            row['Times'] = f"{convert24(times[0][:-1])}-{convert24(times[1][1:])}"
-
-        print(f"{row['Course']},{row['Title']},{row['Days']},{row['Times']},{row['Location']},{row['Instructor']}")
-
 def dc():
     baseDir = "data-collection"
 

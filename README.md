@@ -6,9 +6,9 @@ Infra + Dev into service that queries empty rooms @ NJIT
 
 ## :tram: Infrastructure
 ```txt
-.------------.             .------------.             .------------.
-| Front-end  |   <----->   | Middle-end |   <----->   |  Back-end  |
-'------------'             '------------'             '------------'
+.------------.             .------------.
+| Front-end  |   <----->   |  Back-end  |
+'------------'             '------------'
 ```
 
 ## :triangular_ruler: Architecture

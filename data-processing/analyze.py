@@ -34,6 +34,8 @@ def dc():
     d = {}
     df = pd.concat([pd.read_csv(f"{baseDir}/{f}") for f in os.listdir("data-collection")])
 
+    i = 1
+
     for _, row in df.iterrows():
         row["Days"] = checkNan(row["Days"])
         row["Instructor"] = checkNan(row["Instructor"])
@@ -50,19 +52,23 @@ def dc():
             row['Times'] = f"{convert24(times[0][:-1])}-{convert24(times[1][1:])}"
 
 
-        d[f"{row['Course']}:{row['Section']}"] = {
-            "Title": row["Title"],
-            "Days": row["Days"],
-            "Times": row["Times"],
-            "Location": row["Location"],
-            "Instructor": row["Instructor"]            
+        d[f"{i}"] = {
+            "id": f"{i}",
+            "title": row["Title"],
+            "days": row["Days"],
+            "times": row["Times"],
+            "location": row["Location"],
+            "instructor": row["Instructor"],
+            "course": row["Course"],
+            "section": row["Section"]
         }
+        i += 1
 
     return d
 
 def main():
     d = dc()
-    print(json.dumps(d, sort_keys=True))
+    print(json.dumps(d, sort_keys=False))
 
 
 if __name__ == "__main__":

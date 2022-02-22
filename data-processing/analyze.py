@@ -85,56 +85,27 @@ def iter2(df):
                 d[building] = {}
            
             if room not in d[building]:
-                d[building][room] = {}
+                # To keep order
+                d[building][room] = {"M":[], "T":[], "W":[], "R":[], "F":[]}
 
+                # For Prevent Needless allocations 
+                # d[building][room] = {}
             
             for day in days:
 
+                # For days that aren't:
+                # Monday, Tuesday, Wednesday, Thursday, Friday
                 if day not in d[building][room]:
                     d[building][room][day] = []
 
                 inject = {
                     "key": key, 
                     "title": title,
-                    # "days": day,
                     "time":time,
                     "instructor": instructor
                 }
                 
                 d[building][room][day].append(inject) 
-            
-            # if len(days) == 1:
-            #     inject = {
-            #         "key": key, 
-            #         "title": title,
-            #         "days": days,
-            #         "time":time,
-            #         "instructor": instructor
-            #     }
-
-            #     d[building][room].append(inject)
-            # else:
-            #     for day in days:
-            #         inject = {
-            #             "key": key, 
-            #             "title": title,
-            #             "days": day,
-            #             "time":time,
-            #             "instructor": instructor
-            #         }
-                
-            #         d[building][room].append(inject)
-                # else
-                # d= d[building]
-                # if room not in d[building]:
-                    # d[building] = [room] #, (key, title, days, time, instructor)]
-                # d[building][room]
-                # d[building] = [{room: (room, key, title, days, time, instructor)}]
-            # else:
-                # if room not in d[building]:
-                    
-                # d[building].append([room]) #,(key, title, days, time, instructor)]) 
-
 
     return d
 

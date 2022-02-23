@@ -5,8 +5,21 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
+	"strconv"
 )
 
+const (
+	PORT = 9993
+)
+
+/*
+POST API:
+	- Building
+	- Day
+*/
+
+// Structures
 type Detail struct {
 	Key        string `json:"key"`
 	Title      string `json:"title"`
@@ -14,170 +27,80 @@ type Detail struct {
 	Instructor string `json:"instructor"`
 }
 
-type Day map[string][]Detail
-
-type Room map[string]Day
-
-type Buidling struct {
-	Rooms map[string]Room
-}
-
 // Info -> Building: Room: Day: Details
 type Info map[string]map[string]map[string][]Detail
 
-// var userType = graphql.NewObject(
-// 	graphql.ObjectConfig{
-// 		Name: "details",
-// 		Fields: graphql.Fields{
-// 			"Room": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 			"Key": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 			"Title": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 			"Days": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 			"Times": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 			"Instructor": &graphql.Field{
-// 				Type: graphql.String,
-// 			},
-// 		},
-// 	},
-// )
-
-// var queryType = graphql.NewObject(
-// 	graphql.ObjectConfig{
-// 		Name: "Query",
-// 		Fields: graphql.Fields{
-// 			"key": &graphql.Field{
-// 				Type: userType,
-// 				Args: graphql.FieldConfigArgument{
-// 					"id": &graphql.ArgumentConfig{
-// 						Type: graphql.String,
-// 					},
-// 				},
-// 				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-// 					idQuery, isOK := p.Args["id"].(string)
-// 					if isOK {
-// 						return data[idQuery], nil
-// 					}
-// 					return nil, nil
-// 				},
-// 			},
-// 		},
-// 	})
-
-// var schema, _ = graphql.NewSchema(
-// 	graphql.SchemaConfig{
-// 		Query: queryType,
-// 	},
-// )
-
-func main() {
-
-	// Working
-	// var dat Info
-
-	// content, err := ioutil.ReadFile("out.json")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// err = json.Unmarshal(content, &dat)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// CTR := dat["KUPF"]
-
-	// for rooms := range CTR {
-	// 	fmt.Println(rooms)
-	// }
-
-	// for _, val := range CTR {
-	// 	// fmt.Println("i: [", i, "]")
-	// 	fmt.Println("val: [", val["M"][0].Time, "]")
-	// }
-	// fmt.Println(CTR)
-
-	// Not working
-	// var data Buidling
-	// content, err := ioutil.ReadFile("out.json")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// err = json.Unmarshal(content, &data)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// fmt.Println(data.Rooms)
-
-	var dat Info
-
+// JSONGo: reads and unmarhsals a json file to an object reference
+func JSONGo(filename string, data *Info) {
 	content, err := ioutil.ReadFile("out.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = json.Unmarshal(content, &dat)
+	err = json.Unmarshal(content, data)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	CTR := dat["CTR"]
-
-	// for rooms := range CTR {
-	// 	fmt.Println(rooms)
-	// }
-
-	// for _, val := range CTR {
-	// 	// fmt.Println("i: [", i, "]")
-	// 	fmt.Println("val: [", val["M"][0].Time, "]")
-	// }
-	fmt.Println(CTR)
-
-	// _ = importJSONDataFromFile("out.json", &data)
-	// enc := json.NewEncoder(os.Stdout)
-	// enc.Encode(dat)
-
-	// http.HandleFunc("/graphql", func(w http.ResponseWriter, r *http.Request) {
-	// 	result := graphql.Do(graphql.Params{
-	// 		Schema: schema,
-	// 		RequestString: r.URL.Query().Get("query"),
-	// 	})
-
-	// 	if len(result.Errors) > 0 {
-	// 		fmt.Printf("unexpected errors: %v", result.Errors)
-	// 	}
-
-	// 	json.NewEncoder(w).Encode(result)
-	// })
-
-	// fmt.Println("Now server is running on port 8080")
-	// fmt.Println("Test with Get      : curl -g 'http://localhost:8080/graphql?query={user(id:\"1\"){name}}'")
-	// http.ListenAndServe(":8080", nil)
 }
 
-//Helper function to import json from file to map
-func importJSONDataFromFile(fileName string, result interface{}) (isOK bool) {
-	isOK = true
-	content, err := ioutil.ReadFile(fileName)
-	if err != nil {
-		fmt.Print("Error:", err)
-		isOK = false
+// listRooms: list rooms that are used as classrooms from a building
+func listRooms(data Info, building string) []string {
+	var retSlice []string
+	for room := range data[building] {
+		retSlice = append(retSlice, room)
 	}
-	err = json.Unmarshal(content, result)
-	if err != nil {
-		isOK = false
-		fmt.Print("Error:", err)
+	return retSlice
+}
+
+func building_set(data Info) map[string]bool {
+	set := make(map[string]bool)
+	for building := range data {
+		set[building] = true
 	}
-	return
+	return set
+}
+
+func main() {
+	port := strconv.Itoa(PORT)
+	var dat Info
+
+	// Map values in filename (json file) to `dat` var
+	JSONGo("out.json", &dat)
+
+	bset := building_set(dat)
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case "POST":
+			if err := r.ParseForm(); err != nil {
+				log.Fatal(err.Error())
+			}
+			building := r.FormValue("building")
+			day := r.FormValue("day")
+
+			if building == "CC" {
+				building = "CTR"
+			}
+
+			if bset[building] {
+				rooms := listRooms(dat, building)
+				fmt.Fprintf(w, "{%s}\n", day)
+
+				for _, room := range rooms {
+					fmt.Println(room)
+					classesNum := len(dat[building][room][day])
+					for i := 0; i < classesNum; i++ {
+						fmt.Fprintf(w, "%s -> %v\n", room, dat[building][room][day][i].Time)
+					}
+				}
+			}
+			// log.Println(building)
+
+		default:
+			fmt.Fprintf(w, "POST plz")
+		}
+	})
+
+	fmt.Printf("Server: 'http://localhost:%s'\n", port)
+	http.ListenAndServe(":"+port, nil)
 }

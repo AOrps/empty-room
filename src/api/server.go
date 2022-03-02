@@ -17,6 +17,10 @@ const (
 POST API:
 	- Building
 	- Day
+ex:
+POST
+- building:GITC
+- day:M
 */
 
 // Structures
@@ -52,6 +56,7 @@ func listRooms(data Info, building string) []string {
 	return retSlice
 }
 
+// building_set: creates a set with only buildings
 func building_set(data Info) map[string]bool {
 	set := make(map[string]bool)
 	for building := range data {
@@ -77,6 +82,7 @@ func main() {
 			}
 			building := r.FormValue("building")
 			day := r.FormValue("day")
+			log.Printf("{-->  POST: building:[%s]  day:[%s]}", building, day)
 
 			if building == "CC" {
 				building = "CTR"
@@ -87,7 +93,7 @@ func main() {
 				fmt.Fprintf(w, "{%s}\n", day)
 
 				for _, room := range rooms {
-					fmt.Println(room)
+					// fmt.Println(room)
 					classesNum := len(dat[building][room][day])
 					for i := 0; i < classesNum; i++ {
 						fmt.Fprintf(w, "%s -> %v\n", room, dat[building][room][day][i].Time)

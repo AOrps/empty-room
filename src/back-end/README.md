@@ -1,4 +1,0 @@
-# Back-end
-
-## Technologies
-- Packages:

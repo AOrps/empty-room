@@ -6,19 +6,10 @@ Infra + Dev into service that queries empty rooms @ NJIT
 
 ## :tram: Infrastructure
 ```txt
-.------------.             .------------.
-| Front-end  |   <----->   |  Back-end  |
-'------------'             '------------'
+.------------.             .-------------.
+| Front-end  |   <----->   | API Service |
+'------------'             '-------------'
 ```
-
-## :triangular_ruler: Architecture
-- Front-end
-    - Aesthetics
-- Middle-end
-    - REST API
-- Back-end
-    - Database
-
 
 ## :hammer: How to Build
 - This repo encapsulates multiple components needed for the program to work
@@ -31,10 +22,8 @@ Infra + Dev into service that queries empty rooms @ NJIT
 
 | Directory         | Explanation
 | :---:             | :---
-| [back-end](back-end)              | MySQL Database Connection
-| [front-end](front-end)            | ReactJS Front-end
-| [middle-end](middle-end)          | Business Logic / REST API  
-| [util](util)                      | Util Scripts 
+| [src/front-end](src/front-end)            | ReactJS Front-end
+| [src/api](src/api) | Endpoint to get information about empty-rooms @ NJIT
 | [data-processing](data-processing)| Data Processing from data-collection dir
 
 ## :books: Resources

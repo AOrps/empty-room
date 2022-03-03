@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
 	"strconv"
 )
 
@@ -69,24 +70,27 @@ func main() {
 	port := strconv.Itoa(PORT)
 	var dat Info
 
-	// fs := http.FileServer(http.Dir("."))
-
-	// http.Handle("/data/", http.StripPrefix("/data", fs))
-
 	// Map values in filename (json file) to `dat` var
-	JSONGo("out.json", &dat)
+	fpath, err := filepath.Abs("out.json")
+	if err != nil {
+		log.Fatalf("%s", err.Error())
+	}
+
+	JSONGo(fpath, &dat)
 
 	bset := building_set(dat)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "POST":
+			result := make(map[string][]string)
+
 			if err := r.ParseForm(); err != nil {
 				log.Fatal(err.Error())
 			}
 			building := r.FormValue("building")
 			day := r.FormValue("day")
-			log.Printf("{-->  POST: building:[%s]  day:[%s]}", building, day)
+			log.Printf("<POST: building:[%s]  day:[%s]>", building, day)
 
 			if building == "CC" {
 				building = "CTR"
@@ -94,17 +98,18 @@ func main() {
 
 			if bset[building] {
 				rooms := listRooms(dat, building)
-				fmt.Fprintf(w, "{%s}\n", day)
 
 				for _, room := range rooms {
-					// fmt.Println(room)
 					classesNum := len(dat[building][room][day])
+
 					for i := 0; i < classesNum; i++ {
-						fmt.Fprintf(w, "%s -> %v\n", room, dat[building][room][day][i].Time)
+						result[room] = append(result[room], dat[building][room][day][i].Time)
 					}
 				}
 			}
-			// log.Println(building)
+			// outputs result from out.json in json when ppl connect to it
+			enc := json.NewEncoder(w)
+			enc.Encode(result)
 
 		default:
 			fmt.Fprintf(w, "POST plz")

@@ -69,12 +69,12 @@ func main() {
 	port := strconv.Itoa(PORT)
 	var dat Info
 
-	fs := http.FileServer(http.Dir("."))
+	// fs := http.FileServer(http.Dir("."))
 
-	http.Handle("/data/", http.StripPrefix("/data", fs))
+	// http.Handle("/data/", http.StripPrefix("/data", fs))
 
 	// Map values in filename (json file) to `dat` var
-	JSONGo("data/out.json", &dat)
+	JSONGo("out.json", &dat)
 
 	bset := building_set(dat)
 

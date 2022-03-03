@@ -13,6 +13,7 @@ Infra + Dev into service that queries empty rooms @ NJIT
 
 ## :hammer: How to Build
 - This repo encapsulates multiple components needed for the program to work
+- Ensure that path in `src/api/server.go` corresponds to out.json
 
 ## :microscope: Technologies
 - Languages: `go`, `typescript`, `css`, `html`

@@ -36,7 +36,7 @@ type Info map[string]map[string]map[string][]Detail
 
 // JSONGo: reads and unmarhsals a json file to an object reference
 func JSONGo(filename string, data *Info) {
-	content, err := ioutil.ReadFile("out.json")
+	content, err := ioutil.ReadFile(filename)
 	if err != nil {
 		log.Fatal(err)
 	}

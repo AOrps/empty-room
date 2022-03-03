@@ -15,8 +15,14 @@ Infra + Dev into service that queries empty rooms @ NJIT
 - This repo encapsulates multiple components needed for the program to work
 
 ## :microscope: Technologies
-- Languages: `go`
-- Packages: `mysql-server`, `make`, `nginx`, `ngrok`, `npm`
+- Languages: `go`, `typescript`, `css`, `html`
+- Frameworks: `react`
+- Packages: `nginx`, `ngrok`, `npm`
+
+## Infra
+- [Golang + Nginx Setup](https://github.com/hahdookin/cs490/blob/main/util/dep.sh) 
+- [Infrastructure Confs](https://github.com/hahdookin/cs490/tree/main/infra)
+
 
 ## :microscope: Directory Explanation
 
@@ -33,3 +39,4 @@ Infra + Dev into service that queries empty rooms @ NJIT
 - [MySQL New User](https://askubuntu.com/questions/1322175/not-allowed-to-create-user-with-grant)
 - [Avoid SQL Injection](https://go.dev/doc/database/sql-injection)
 - [React: Creating a new react app](https://reactjs.org/docs/create-a-new-react-app.html)
+- [nginx proxy_pass server set_up](https://serverfault.com/questions/598202/make-nginx-to-pass-hostname-of-the-upstream-when-reverseproxying)

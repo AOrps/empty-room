@@ -12,7 +12,7 @@ import {
   Image,
 } from 'react-bootstrap';
 import { Sched } from './components/Sched';
-import { FindRoom } from './components/API';
+import FindRoom from './components/API';
 
 function App() {
   return (

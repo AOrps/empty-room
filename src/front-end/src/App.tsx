@@ -10,12 +10,9 @@ import {
   Nav,
   Container,
   Image,
-  Form,
-  Row, Col
 } from 'react-bootstrap';
 import { Sched } from './components/Sched';
-import { InfoTable } from './components/Building';
-
+import { FindRoom } from './components/API';
 
 function App() {
   return (
@@ -23,7 +20,7 @@ function App() {
       <Navbar bg="dark" expand="lg" variant="dark">
         <Container fluid>
           <Navbar.Brand href="/">
-            <Image fluid src={require("./images/empty-room-logo.png")} width="150px" alt="empty-room logo"/>
+            <Image fluid src={require("./images/empty-room-logo.png")} width="150px" alt="empty-room logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -63,28 +60,6 @@ export const CustomSchedule = () => {
   );
 }
 
-export const FindRoom = () => {
-
-  return (
-    <Container className="App">
-      <Row>
-        <Col>
-          <br />
-          <InfoTable />
-        </Col>
-        <Col>
-        <br />
-          <Form>
-            <Form.Label>Enter Building to find an empty-room</Form.Label>
-            <Form.Control id="building" />
-            <Form.Text>It is totally valid to enter the Building Abbreviation</Form.Text>
-          </Form>
-        </Col>
-      </Row>
-
-    </Container>
-  );
-}
 
 
 export default App;

@@ -6,25 +6,62 @@ import {
 } from 'react-bootstrap';
 import { InfoTable } from './Building';
 import React, { Component } from "react";
+import axios, { Axios } from "axios";
 
-class FindRoom extends Component {
+class FindRoom extends Component<{}, any> {
 
-    constructor() {
-        super();
-        this.state = {value: ""};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    constructor(props:any) {
+        super(props);
+        this.state = {
+            building: "",
+            day: "",
+            // result: ""
+        };
+        this.onInputchange = this.onInputchange.bind(this);
+        this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
-    handleChange(event: React.ChangeEvent) { this.setState({ value: event.target.value }); }
-    handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
-        event.preventDefault();
-    }
+    onInputchange = (event) => {
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+      }
+
+      onSubmitForm = (event) => {
+            event.preventDefault();
+            // console.log(this.state);
+            this.handleButtonClick();
+      }
+
+    handleButtonClick = () => {
+        const fetchUserEmail = async () => {
+            const response = axios.post("https://ec2-18-119-118-48.us-east-2.compute.amazonaws.com",
+                {
+                    building: this.state.building,
+                    day: this.state.day
+                }
+                // method: 'POST',
+                // JSON.stringify({
+                    // building: this.state.building,
+                    // day: this.state.day,
+                // })
+            ).then(response => {
+                console.log(response)
+                this.setState({result: response})
+                // alert(response.json())
+            });
+            // const { result } = await response.json();
+            // this.setState({
+            //     result
+            // });
+        };
+        console.log(this.state);
+        fetchUserEmail();
+    };
 
 
     render() {
-
+        const { building, day, result } = this.state;
 
         return (
             <Container className="App" >
@@ -36,33 +73,26 @@ class FindRoom extends Component {
                     <Col>
                         <br />
                         <h2>To Find an empty-room, fill out the following: </h2>
-                        <form onSubmit={this.handleSubmit}>
-                            <label>
-                                Name:
-                                <input type="text" value={this.state.value} onChange={this.handleChange} />        </label>
-                            <input type="submit" value="Submit" />
-                        </form>
-                        <div>{this.state.value}</div>
-                        {/* <Form>
+                        <Form>
                             <Row>
                                 <Col>
                                     <Form.Label>Enter Building</Form.Label>
-                                    <Form.Control id="building" />
+                                    <FormControl id="building" name="building" value={this.state.building} onChange={this.onInputchange} />
                                     <Form.Text>You can use building Abbreviations</Form.Text>
                                 </Col>
                                 <Col>
                                     <Form.Label>Enter Day</Form.Label>
-                                    <FormControl id="day" />
+                                    <FormControl id="day" name="day" value={this.state.day} onChange={this.onInputchange} />
                                     <Form.Text>ex. M -&gt; Monday, T -&gt; Tuesday, W -&gt; Wednesday</Form.Text>
                                 </Col>
                             </Row>
                             <br />
                             <Row>
-                                <Button variant="outline-info" type='submit'>Find empty-room!</Button>
+                                <Button variant="outline-info" type='submit' onClick={this.onSubmitForm}>Find empty-room!</Button>
                             </Row>
                             <br />
-                            <div></div>
-                        </Form> */}
+                            <div>{this.state.result}</div>
+                        </Form>
                     </Col>
                 </Row>
 

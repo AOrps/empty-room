@@ -6,35 +6,31 @@ Infra + Dev into service that queries empty rooms @ NJIT
 
 ## :tram: Infrastructure
 ```txt
-.------------.             .------------.
-| Front-end  |   <----->   |  Back-end  |
-'------------'             '------------'
+.------------.             .-------------.
+| Front-end  |   <----->   | API Service |
+'------------'             '-------------'
 ```
-
-## :triangular_ruler: Architecture
-- Front-end
-    - Aesthetics
-- Middle-end
-    - REST API
-- Back-end
-    - Database
-
 
 ## :hammer: How to Build
 - This repo encapsulates multiple components needed for the program to work
+- Ensure that path in `src/api/server.go` corresponds to out.json
 
 ## :microscope: Technologies
-- Languages: `go`
-- Packages: `mysql-server`, `make`, `nginx`, `ngrok`, `npm`
+- Languages: `go`, `typescript`, `css`, `html`
+- Frameworks: `react`
+- Packages: `nginx`, `ngrok`, `npm`
+
+## Infra
+- [Golang + Nginx Setup](https://github.com/hahdookin/cs490/blob/main/util/dep.sh) 
+- [Infrastructure Confs](https://github.com/hahdookin/cs490/tree/main/infra)
+
 
 ## :microscope: Directory Explanation
 
 | Directory         | Explanation
 | :---:             | :---
-| [back-end](back-end)              | MySQL Database Connection
-| [front-end](front-end)            | ReactJS Front-end
-| [middle-end](middle-end)          | Business Logic / REST API  
-| [util](util)                      | Util Scripts 
+| [src/front-end](src/front-end)            | ReactJS Front-end
+| [src/api](src/api) | Endpoint to get information about empty-rooms @ NJIT
 | [data-processing](data-processing)| Data Processing from data-collection dir
 
 ## :books: Resources
@@ -44,3 +40,4 @@ Infra + Dev into service that queries empty rooms @ NJIT
 - [MySQL New User](https://askubuntu.com/questions/1322175/not-allowed-to-create-user-with-grant)
 - [Avoid SQL Injection](https://go.dev/doc/database/sql-injection)
 - [React: Creating a new react app](https://reactjs.org/docs/create-a-new-react-app.html)
+- [nginx proxy_pass server set_up](https://serverfault.com/questions/598202/make-nginx-to-pass-hostname-of-the-upstream-when-reverseproxying)

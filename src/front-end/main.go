@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strconv"
 	
-	L "github.com/AOrps/empty-room/src/front-end"
+	L "github.com/AOrps/empty-room/src/front-end/lib"
 )
 
 const (
@@ -15,21 +15,11 @@ const (
 	API  = "https://ec2-18-119-118-48.us-east-2.compute.amazonaws.com"
 )
 
-// func root(w http.ResponseWriter, r *http.Request) {
-// 	tmpl := template.Must(template.ParseGlob("templates/*.html"))
-// 	navBar := []string{"map", "schedule", "find-room"}
-// 	tmpl.ExecuteTemplate(w, "head", navBar)
-// 	tmpl.ExecuteTemplate(w, "footer", nil)
-// }
-
 func mapfx(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseGlob("templates/*.html"))
 	navBar := []string{"map", "schedule", "find-room"}
 	tmpl.ExecuteTemplate(w, "head", navBar)
-
-	// New thing
 	tmpl.ExecuteTemplate(w, "map", nil)
-
 	tmpl.ExecuteTemplate(w, "footer", nil)
 }
 
@@ -48,9 +38,17 @@ func findRoom(w http.ResponseWriter, r *http.Request) {
 	navBar := []string{"map", "schedule", "find-room"}
 	tmpl.ExecuteTemplate(w, "head", navBar)
 
+	tmpl.ExecuteTemplate(w, "find-start", nil)
+
+
 	// Exec
-	infoblock := L.jsonToHTML()
+	infoblock := L.JsonInfo()
 	tmpl.ExecuteTemplate(w, "info", infoblock)
+	tmpl.ExecuteTemplate(w, "find-form", nil)
+
+
+	tmpl.ExecuteTemplate(w, "find-end", nil)
+
 
 	tmpl.ExecuteTemplate(w, "footer", nil)
 }

@@ -1,4 +1,5 @@
 {{block "info" .}}
+<div class="col">
 <table class="table table-striped table-hover table-sm">
     <thread>
         <tr>
@@ -8,15 +9,16 @@
         </tr>
     </thread>
     <tbody>
+        {{range .}}
         <tr>
-            {{range .}}
             <td>{{.Building}}</td>
             <td>{{.Num}}</td>
             <td>{{.Abbrev}}</td>
-            {{end}}
         </tr>
+        {{end}}
     </tbody>
 </table>
+</div>
 {{end}}
 
 {{block "map" .}}

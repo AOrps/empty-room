@@ -11,7 +11,8 @@ import (
 )
 
 const (
-	PORT = 9993
+	PORT         = 9993
+	JSONCONFPATH = "out.json"
 )
 
 /*
@@ -71,7 +72,7 @@ func main() {
 	var dat Info
 
 	// Map values in filename (json file) to `dat` var
-	fpath, err := filepath.Abs("out.json")
+	fpath, err := filepath.Abs(JSONCONFPATH)
 	if err != nil {
 		log.Fatalf("%s", err.Error())
 	}

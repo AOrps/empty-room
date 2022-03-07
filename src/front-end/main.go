@@ -66,7 +66,7 @@ func findRoom(w http.ResponseWriter, r *http.Request) {
 		body, err := ioutil.ReadAll(resp.Body)
 		L.Check(err)
 
-		fmt.Fprintf(w, "%v", string(body))
+		fmt.Printf("<%v>", string(body))
 	}
 	tmpl := template.Must(template.ParseGlob("templates/*.html"))
 	navBar := []string{"map", "schedule", "find-room"}

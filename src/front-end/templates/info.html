@@ -1,0 +1,26 @@
+{{block "info" .}}
+<table class="table table-striped table-hover table-sm">
+    <thread>
+        <tr>
+            <th>Building By Name</th>
+            <th>Building #</th>
+            <th>Abbreviation</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr>
+            {{range .}}
+            <td>{{.Building}}</td>
+            <td>{{.Num}}</td>
+            <td>{{.Abbrev}}</td>
+            {{end}}
+        </tr>
+    </tbody>
+</table>
+{{end}}
+
+{{block "map" .}}
+<div style="text-align: center; margin: 4%;">
+    <img class="img-fluid" src="/assets/img/njit.jpg" alt="Map of NJIT" width="90%" />
+</div>
+{{end}}

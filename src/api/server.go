@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"path/filepath"
 	"strconv"
+	"strings"
+	"time"
 )
 
 const (
@@ -89,12 +91,34 @@ func main() {
 			if err := r.ParseForm(); err != nil {
 				log.Fatal(err.Error())
 			}
-			building := r.FormValue("building")
-			day := r.FormValue("day")
+			building := strings.ToUpper(r.FormValue("building"))
+			day := strings.ToUpper(r.FormValue("day"))
+
 			log.Printf("<POST: building:[%s]  day:[%s]>", building, day)
 
 			if building == "CC" {
 				building = "CTR"
+			}
+
+			// default picker if it goes to default
+			weekDay := time.Now().Weekday()
+
+			switch strings.ToLower(day) {
+			case "monday":
+				day = "M"
+			case "tuesday":
+				day = "T"
+			case "wednesday":
+				day = "W"
+			case "thursday":
+				day = "R"
+			case "friday":
+				day = "F"
+			case "saturday":
+				day = "S"
+			default:
+				dayz := []string{"SUN", "M", "T", "W", "R", "F", "S"}
+				day = dayz[int(weekDay)]
 			}
 
 			if bset[building] {

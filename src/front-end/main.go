@@ -14,7 +14,7 @@ import (
 
 const (
 	PORT = 9994
-	API  = "https://ec2-18-119-118-48.us-east-2.compute.amazonaws.com"
+	API  = "http://ec2-18-119-118-48.us-east-2.compute.amazonaws.com/api"
 )
 
 func mapfx(w http.ResponseWriter, r *http.Request) {
@@ -66,7 +66,7 @@ func findRoom(w http.ResponseWriter, r *http.Request) {
 		body, err := ioutil.ReadAll(resp.Body)
 		L.Check(err)
 
-		fmt.Printf("<%v>", string(body))
+		fmt.Printf("<%v>\n", string(body))
 	}
 	tmpl := template.Must(template.ParseGlob("templates/*.html"))
 	navBar := []string{"map", "schedule", "find-room"}

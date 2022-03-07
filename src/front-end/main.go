@@ -78,7 +78,7 @@ func findRoom(w http.ResponseWriter, r *http.Request) {
 }
 
 func about(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseGlob("templates/*.html"))
+	tmpl := template.Must(template.ParseGlob("/templates/*.html"))
 	navBar := L.NavBar()
 	tmpl.ExecuteTemplate(w, "head", navBar)
 

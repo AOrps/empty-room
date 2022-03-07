@@ -1,11 +1,20 @@
 package lib
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"log"
+)
 
 type InfoBlock struct {
 	Building string `json:"building"`
 	Num      string `json:"num"`
 	Abbrev   string `json:"abbrev"`
+}
+
+func Check(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func JsonInfo() []InfoBlock {

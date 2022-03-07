@@ -3,10 +3,12 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"strconv"
-	
+
 	L "github.com/AOrps/empty-room/src/front-end/lib"
 )
 
@@ -34,22 +36,52 @@ func schedule(w http.ResponseWriter, r *http.Request) {
 }
 
 func findRoom(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "POST":
+		if err := r.ParseForm(); err != nil {
+			log.Fatal(err.Error())
+		}
+
+		building := r.FormValue("building")
+		day := r.FormValue("day")
+
+		// postBody, err := json.Marshal(map[string]string{
+		// 	"building": building,
+		// 	"day":      day,
+		// })
+		// L.Check(err)
+
+		// data := bytes.NewBuffer(postBody)
+
+		data := url.Values{
+			"building": {building},
+			"day":      {day},
+		}
+
+		resp, err := http.PostForm(API, data)
+		L.Check(err)
+
+		defer resp.Body.Close()
+
+		body, err := ioutil.ReadAll(resp.Body)
+		L.Check(err)
+
+		fmt.Fprintf(w, "%v", string(body))
+	}
 	tmpl := template.Must(template.ParseGlob("templates/*.html"))
 	navBar := []string{"map", "schedule", "find-room"}
 	tmpl.ExecuteTemplate(w, "head", navBar)
 
 	tmpl.ExecuteTemplate(w, "find-start", nil)
 
-
-	// Exec
+	// Info Block (Table with Info about Buildings)
 	infoblock := L.JsonInfo()
 	tmpl.ExecuteTemplate(w, "info", infoblock)
+
+	// Form
 	tmpl.ExecuteTemplate(w, "find-form", nil)
 
-
 	tmpl.ExecuteTemplate(w, "find-end", nil)
-
-
 	tmpl.ExecuteTemplate(w, "footer", nil)
 }
 

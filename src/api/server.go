@@ -80,7 +80,7 @@ func main() {
 
 	bset := building_set(dat)
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "POST":
 			result := make(map[string][]string)

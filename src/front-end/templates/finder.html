@@ -3,8 +3,28 @@
 {{end}}
 
 {{block "find-form" .}}
-<div class="col">
-
+<div class="col" style="padding: 1.5%;text-align: center;">
+    <form method="POST">
+    <div class="row">
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" name="building" class="form-control" id="building" placeholder="GITC">
+                <label for="building">Building</label>
+            </div>
+            <label for="Description" class="form-label fw-lighter fs-6">Feel free to use Abbreviations!</label>
+        </div>
+        <div class="col">
+            <div class="form-floating mb-3">
+                <input type="text" name="day" class="form-control" id="day" placeholder="M">
+                <label for="day">Day</label>
+            </div>
+            <label for="Description" class="form-label fw-lighter fs-6">ex. M -> Monday, T -> Tuesday, W -> Wednesday</label>
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-outline-info col-8 mx-auto">Submit</button>
+    </div>
+    </form>
 </div>
 {{end}}
 

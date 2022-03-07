@@ -22,7 +22,24 @@
 {{end}}
 
 {{block "map" .}}
-<div style="text-align: center; margin: 4%;">
+<div style="text-align: center; padding: 4%;">
     <img class="img-fluid" src="/assets/img/njit.jpg" alt="Map of NJIT" width="90%" />
+</div>
+{{end}}
+
+{{block "about" .}}
+<div style="padding: 4%; text-align: center;">
+    <p>Meant to be the front-end for the service</p>
+    <br>
+
+    <p>Curious about using the API? Make POST request to <pre>http://ec2-18-119-118-48.us-east-2.compute.amazonaws.com/api</pre></p>
+    <br>
+
+    <div>
+        <p>EX:</p>
+        <code>
+            curl -X POST ec2-18-119-118-48.us-east-2.compute.amazonaws.com/api -d 'building=ENTER_BUILDING&day=ENTER_DAY'
+        </code>
+    </div>
 </div>
 {{end}}

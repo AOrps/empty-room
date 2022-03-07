@@ -25,3 +25,7 @@ func JsonInfo() []InfoBlock {
 
 	return data
 }
+
+func NavBar() []string {
+	return []string{"map", "schedule", "find-room", "about"}
+}

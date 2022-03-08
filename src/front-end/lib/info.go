@@ -3,6 +3,8 @@ package lib
 import (
 	"encoding/json"
 	"log"
+	"net/http"
+	"text/template"
 )
 
 type InfoBlock struct {
@@ -28,4 +30,22 @@ func JsonInfo() []InfoBlock {
 
 func NavBar() []string {
 	return []string{"map", "schedule", "find-room", "about"}
+}
+
+func POSTRESPONSE(w http.ResponseWriter, rawjson []byte) {
+
+	var rooms map[string][]string
+
+	json.Unmarshal([]byte(rawjson), &rooms)
+
+	tmpl := template.Must(template.ParseGlob("templates/*.html"))
+	navBar := NavBar()
+
+	tmpl.ExecuteTemplate(w, "head", navBar)
+
+	// Exec
+	// fmt.Fprintf(w, "%v", rooms)
+	tmpl.ExecuteTemplate(w, "rooms", rooms)
+
+	tmpl.ExecuteTemplate(w, "footer", nil)
 }

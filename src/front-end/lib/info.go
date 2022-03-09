@@ -13,6 +13,11 @@ type InfoBlock struct {
 	Abbrev   string `json:"abbrev"`
 }
 
+type Room struct {
+	Room  string
+	Times []string
+}
+
 func Check(err error) {
 	if err != nil {
 		log.Fatal(err)

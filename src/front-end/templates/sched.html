@@ -3,7 +3,13 @@
 {{end}}
 
 {{block "rooms" .}}
-{{range .}}
-<div>{{.}}</div>
+<div>
+{{range $k, $v := .}}
+    <h3>{{$k}}</h3>
+    {{range $v}}
+    <p>{{.}}</p>
+    {{end}}
+    <br />
 {{end}}
+</div>
 {{end}}

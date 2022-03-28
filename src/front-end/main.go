@@ -7,15 +7,23 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 
 	L "github.com/AOrps/empty-room/src/front-end/lib"
+	"github.com/joho/godotenv"
 )
 
 const (
 	PORT = 9994
-	API  = "http://ec2-18-119-118-48.us-east-2.compute.amazonaws.com/api"
 )
+
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
 
 func mapfx(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseGlob("templates/*.html"))
@@ -48,7 +56,7 @@ func findRoom(w http.ResponseWriter, r *http.Request) {
 			"day":      {r.FormValue("day")},
 		}
 
-		resp, err := http.PostForm(API, data)
+		resp, err := http.PostForm(os.Getenv("BACKEND"), data)
 		L.Check(err)
 
 		defer resp.Body.Close()

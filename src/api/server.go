@@ -60,8 +60,8 @@ func listRooms(data Info, building string) []string {
 	return retSlice
 }
 
-// building_set: creates a set with only buildings
-func building_set(data Info) map[string]bool {
+// buildingSet: creates a set with only buildings
+func buildingSet(data Info) map[string]bool {
 	set := make(map[string]bool)
 	for building := range data {
 		set[building] = true
@@ -81,9 +81,9 @@ func main() {
 
 	JSONGo(fpath, &dat)
 
-	bset := building_set(dat)
+	bset := buildingSet(dat)
 
-	http.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "POST":
 			result := make(map[string][]string)
@@ -135,7 +135,6 @@ func main() {
 			// outputs result from out.json in json when ppl connect to it
 			enc := json.NewEncoder(w)
 			enc.Encode(result)
-
 		default:
 			fmt.Fprintf(w, "POST plz")
 		}

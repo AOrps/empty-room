@@ -3,19 +3,10 @@ Service that queries empty rooms @ NJIT
 
 ## Site
 - Site: `http://empty-room.xyz` 
-- API Endpoint: `https://ec2-18-119-118-48.us-east-2.compute.amazonaws.com`
-
-
-## :tram: Infrastructure
-```txt
-.------------.             .-------------.
-| Front-end  |   <----->   | API Service |
-'------------'             '-------------'
-```
 
 ## :microscope: Technologies
-- Languages: `go`, `css`, `html`
-- Packages: `nginx`,
+- Languages: `go`, `css`, `html`, `python`
+- Packages: `nginx`,`python-pandas`
 
 ## Infra
 - [Golang + Nginx Setup](https://github.com/hahdookin/cs490/blob/main/util/dep.sh) 
@@ -26,9 +17,9 @@ Service that queries empty rooms @ NJIT
 
 | Directory                             | Explanation
 | :---:                                 | :---
-| [src/front-end](src/front-end)        | Golang/Bootstrap Front-end
-| [src/api](src/api)                    | Endpoint to get information about empty-rooms @ NJIT
+| [conf](confs)                         | Server Configurations
 | [data-processing](data-processing)    | Data Processing from data-collection dir
+| [src/](src)                           | Source Code for the web app
 
 ## :books: Resources
 - [Install Ansible OSERROR Python Fix](https://stackoverflow.com/questions/54778630/could-not-install-packages-due-to-an-environmenterror-errno-2-no-such-file-or)

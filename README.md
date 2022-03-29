@@ -18,9 +18,10 @@ Service that queries empty rooms @ NJIT
 
 | Directory                             | Explanation
 | :---:                                 | :---
-| [conf](confs)                         | Server Configurations
+| [configs](configs)                    | Server Configurations
 | [data-processing](data-processing)    | Processes data inside the data-processing/data-collection directory
-| [src/](src)                           | Source Code for the web app to get everything set
+| [pkg](pkg)                            | Source Code for the web app to get everything set
+| [web](web)                            | Web: Assets + Templates
 
 ## :books: Resources
 - [Install Ansible OSERROR Python Fix](https://stackoverflow.com/questions/54778630/could-not-install-packages-due-to-an-environmenterror-errno-2-no-such-file-or)

@@ -15,7 +15,8 @@ import (
 )
 
 const (
-	PORT = 9994
+	PORT      = 9994
+	TMPLPARSE = "web/template/*.html"
 )
 
 func init() {
@@ -26,7 +27,7 @@ func init() {
 }
 
 func mapfx(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseGlob("templates/*.html"))
+	tmpl := template.Must(template.ParseGlob(TMPLPARSE))
 	navBar := L.NavBar()
 	tmpl.ExecuteTemplate(w, "head", navBar)
 	tmpl.ExecuteTemplate(w, "map", nil)
@@ -34,7 +35,7 @@ func mapfx(w http.ResponseWriter, r *http.Request) {
 }
 
 func schedule(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseGlob("templates/*.html"))
+	tmpl := template.Must(template.ParseGlob(TMPLPARSE))
 	navBar := L.NavBar()
 	tmpl.ExecuteTemplate(w, "head", navBar)
 
@@ -71,7 +72,7 @@ func findRoom(w http.ResponseWriter, r *http.Request) {
 		L.POSTRESPONSE(w, body)
 
 	default:
-		tmpl := template.Must(template.ParseGlob("templates/*.html"))
+		tmpl := template.Must(template.ParseGlob(TMPLPARSE))
 		navBar := L.NavBar()
 		tmpl.ExecuteTemplate(w, "head", navBar)
 
@@ -90,7 +91,7 @@ func findRoom(w http.ResponseWriter, r *http.Request) {
 }
 
 func about(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseGlob("templates/*.html"))
+	tmpl := template.Must(template.ParseGlob(TMPLPARSE))
 	navBar := L.NavBar()
 	tmpl.ExecuteTemplate(w, "head", navBar)
 
@@ -107,7 +108,7 @@ func main() {
 
 	fs := http.FileServer(http.Dir("."))
 	// Puts everything from File Server into a /assets/ directory
-	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/", findRoom)
 	http.HandleFunc("/map", mapfx)

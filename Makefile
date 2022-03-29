@@ -1,5 +1,5 @@
 SHELL=/bin/bash
-OUTPUT= main.o
+OUTPUT=main.o
 
 all: compile
 

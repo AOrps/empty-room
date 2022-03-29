@@ -5,8 +5,9 @@ Service that queries empty rooms @ NJIT
 - Site: `http://empty-room.xyz` 
 
 ## :microscope: Technologies
-- Languages: `go`, `css`, `html`, `python`
+- Languages: `go`, `css`, `html`, `python3`
 - Packages: `nginx`,`python-pandas`
+- Technologies: `make`
 
 ## Infra
 - [Golang + Nginx Setup](https://github.com/hahdookin/cs490/blob/main/util/dep.sh) 
@@ -18,8 +19,8 @@ Service that queries empty rooms @ NJIT
 | Directory                             | Explanation
 | :---:                                 | :---
 | [conf](confs)                         | Server Configurations
-| [data-processing](data-processing)    | Data Processing from data-collection dir
-| [src/](src)                           | Source Code for the web app
+| [data-processing](data-processing)    | Processes data inside the data-processing/data-collection directory
+| [src/](src)                           | Source Code for the web app to get everything set
 
 ## :books: Resources
 - [Install Ansible OSERROR Python Fix](https://stackoverflow.com/questions/54778630/could-not-install-packages-due-to-an-environmenterror-errno-2-no-such-file-or)

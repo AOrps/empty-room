@@ -1,12 +1,7 @@
-"""
-Takes a hidden data-collection dir and analyzes it for stuff in DB schema.
-
-PIP Requirements: pandas
-"""
-
 import pandas as pd
 import os
 import json
+
 
 def convert24(time: str) -> str:
     setOffset = False

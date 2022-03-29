@@ -1,5 +1,4 @@
 SHELL=/bin/bash
-
 all = json
 
 json: 

@@ -20,7 +20,7 @@ func JSONGo(filename string, data *Info) {
 }
 
 // listRooms: list rooms that are used as classrooms from a building
-func listRooms(data Info, building string) []string {
+func ListRooms(data Info, building string) []string {
 	var retSlice []string
 	for room := range data[building] {
 		retSlice = append(retSlice, room)
@@ -29,7 +29,7 @@ func listRooms(data Info, building string) []string {
 }
 
 // buildingSet: creates a set with only buildings
-func buildingSet(data Info) map[string]bool {
+func BuildingSet(data Info) map[string]bool {
 	set := make(map[string]bool)
 	for building := range data {
 		set[building] = true

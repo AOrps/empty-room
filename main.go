@@ -10,7 +10,7 @@ import (
 	"os"
 	"strconv"
 
-	L "github.com/AOrps/empty-room/src/front-end/lib"
+	L "github.com/AOrps/empty-room/pkg/front-end"
 	"github.com/joho/godotenv"
 )
 
@@ -106,8 +106,9 @@ func main() {
 
 	fmt.Printf("http://localhost:%s\n", port)
 
-	fs := http.FileServer(http.Dir("."))
-	// Puts everything from File Server into a /assets/ directory
+	fs := http.FileServer(http.Dir("./web"))
+	// Puts everything from File Server into a /static/ directory
+	// puts prefix of /static/
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/", findRoom)

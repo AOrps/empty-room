@@ -21,3 +21,6 @@ data-collection/
 
 # Environment
 .env
+
+# Custom Binary
+*.o

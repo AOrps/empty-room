@@ -39,6 +39,7 @@ func main() {
 	http.HandleFunc("/schedule", fe.Schedule)
 	http.HandleFunc("/find-room", fe.FindRoom)
 	http.HandleFunc("/about", fe.About)
+	http.HandleFunc("/api", fe.Api)
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

@@ -2,7 +2,6 @@ package frontend
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -14,6 +13,7 @@ import (
 
 const (
 	TMPLPARSE = "web/template/*.html"
+	JSONAPI   = "web/api/out.json"
 )
 
 // Map:
@@ -58,6 +58,9 @@ func FindRoom(w http.ResponseWriter, r *http.Request) {
 
 	bset := pjson.BuildingSet(dat)
 
+	tmpl := template.Must(template.ParseGlob(TMPLPARSE))
+	navBar := NavBar()
+
 	switch r.Method {
 	case "POST":
 		result := make(map[string][]string)
@@ -69,12 +72,7 @@ func FindRoom(w http.ResponseWriter, r *http.Request) {
 		building := strings.ToUpper(r.FormValue("building"))
 		day := strings.ToUpper(r.FormValue("day"))
 
-		// data := url.Values{
-		// 	"building": {r.FormValue("building")},
-		// 	"day":      {r.FormValue("day")},
-		// }
-
-		fmt.Fprintf(w, "%s -> %s ", day, building)
+		// fmt.Fprintf(w, "%s -> %s ", day, building)
 
 		if building == "CC" {
 			building = "CTR"
@@ -112,8 +110,8 @@ func FindRoom(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		// outputs result from out.json in json when ppl connect to it
-		enc := json.NewEncoder(w)
-		enc.Encode(result)
+		// enc := json.NewEncoder(w)
+		// enc.Encode(result)
 		// resp, err := http.PostForm(os.Getenv("BACKEND"), data)
 		// u.Check(err)
 		// defer resp.Body.Close()
@@ -126,8 +124,13 @@ func FindRoom(w http.ResponseWriter, r *http.Request) {
 		// body is []byte
 		// requ.POSTRESPONSE(w, body)
 
+		tmpl.ExecuteTemplate(w, "head", navBar)
+
+		tmpl.ExecuteTemplate(w, "rooms", result)
+
+		tmpl.ExecuteTemplate(w, "footer", nil)
+
 	default:
-		tmpl := template.Must(template.ParseGlob(TMPLPARSE))
 		navBar := NavBar()
 		tmpl.ExecuteTemplate(w, "head", navBar)
 
@@ -143,4 +146,12 @@ func FindRoom(w http.ResponseWriter, r *http.Request) {
 		tmpl.ExecuteTemplate(w, "find-end", nil)
 		tmpl.ExecuteTemplate(w, "footer", nil)
 	}
+}
+
+func Api(w http.ResponseWriter, r *http.Request) {
+	var dat pjson.Info
+	fpath := "web/api/out.json"
+	pjson.JSONGo(fpath, &dat)
+	enc := json.NewEncoder(w)
+	enc.Encode(dat)
 }

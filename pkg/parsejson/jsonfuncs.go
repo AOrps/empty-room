@@ -1,20 +1,10 @@
-package lib
+package parsejson
 
 import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
 )
-
-type Detail struct {
-	Key        string `json:"key"`
-	Title      string `json:"title"`
-	Time       string `json:"time"`
-	Instructor string `json:"instructor"`
-}
-
-// Info -> Building: Room: Day: Details
-type Info map[string]map[string]map[string][]Detail
 
 // JSONGo: reads and unmarhsals a json file to an object reference
 func JSONGo(filename string, data *Info) {

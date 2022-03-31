@@ -1,18 +1,21 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 
 	fe "github.com/AOrps/empty-room/pkg/frontend"
+	pjson "github.com/AOrps/empty-room/pkg/parsejson"
 	"github.com/joho/godotenv"
 )
 
 const (
 	PORT      = 9994
 	TMPLPARSE = "web/template/*.html"
+	JSONAPI   = "web/api/out.json"
 )
 
 // init: function that get's called on initialization
@@ -22,6 +25,16 @@ func init() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+}
+
+func Api(w http.ResponseWriter, r *http.Request) {
+	var data pjson.Info
+	pjson.JSONGo(JSONAPI, &data)
+	// fmt.Fprintf(w, "%s", ":"+strconv.Itoa(PORT+1))
+	enc := json.NewEncoder(w)
+	// A nice pretty print of JSON via SetIdent to values
+	enc.SetIndent("", "  ")
+	enc.Encode(data)
 }
 
 func main() {
@@ -40,6 +53,13 @@ func main() {
 	http.HandleFunc("/find-room", fe.FindRoom)
 	http.HandleFunc("/about", fe.About)
 	http.HandleFunc("/api", fe.Api)
+
+	// Api Server
+	apiServer := http.NewServeMux()
+	apiServer.HandleFunc("/", Api)
+	go func() {
+		log.Fatal(http.ListenAndServe(":"+strconv.Itoa(PORT+1), apiServer))
+	}()
 
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

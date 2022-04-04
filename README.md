@@ -33,3 +33,4 @@ Service that queries empty rooms @ NJIT
 - [OG Go Digitalocean Service](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-go-web-application-using-nginx-on-ubuntu-18-04#conclusion)
 - [Lets encrypt nginx: ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04)
 - [Serving Static Content](https://www.alexedwards.net/blog/serving-static-sites-with-go)
+- `Be sure to add subdomain onto DO to track the api service`

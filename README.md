@@ -1,3 +1,4 @@
+[![](https://img.shields.io/badge/Layout-Go%20Standard-informational)](https://github.com/golang-standards/project-layout)
 # empty-room
 Service that queries empty rooms @ NJIT
 
